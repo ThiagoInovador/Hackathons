@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinela do Café - IA e Precisão para o Cafezal de Montanha</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .hero-bg {
+            background: linear-gradient(135deg, #064e3b 0%, #059669 50%, #10b981 100%);
+        }
+        .coffee-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        .stat-counter {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #059669;
+        }
+        .logo-coffee {
+            fill: #059669;
+        }
+        .logo-shield {
+            fill: #064e3b;
+        }
+        .logo-eye {
+            fill: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12">
+                        <svg viewBox="0 0 48 48" class="w-full h-full">
+                            <!-- Shield base -->
+                            <path d="M24 4L8 10v12c0 10 6.5 19.5 16 22 9.5-2.5 16-12 16-22V10L24 4z" class="logo-shield"/>
+                            <!-- Coffee bean -->
+                            <ellipse cx="24" cy="20" rx="6" ry="8" class="logo-coffee"/>
+                            <path d="M24 14c-2 0-4 2-4 4s2 4 4 4" fill="none" stroke="#ffffff" stroke-width="1"/>
+                            <!-- AI Eye -->
+                            <circle cx="24" cy="32" r="4" class="logo-eye"/>
+                            <circle cx="24" cy="32" r="2" class="logo-shield"/>
+                            <!-- Tech lines -->
+                            <line x1="16" y1="28" x2="20" y2="32" stroke="#dc2626" stroke-width="1"/>
+                            <line x1="32" y1="28" x2="28" y2="32" stroke="#dc2626" stroke-width="1"/>
+                            <line x1="16" y1="36" x2="20" y2="32" stroke="#dc2626" stroke-width="1"/>
+                            <line x1="32" y1="36" x2="28" y2="32" stroke="#dc2626" stroke-width="1"/>
+                        </svg>
+                    </div>
+                    <h1 class="text-xl font-bold text-gray-900">Sentinela do Café</h1>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#solucao" class="text-gray-700 hover:text-green-600 transition-colors font-medium">Solução</a>
+                    <a href="#resultados" class="text-gray-700 hover:text-green-600 transition-colors font-medium">Resultados</a>
+                    <a href="#roadmap" class="text-gray-700 hover:text-green-600 transition-colors font-medium">Roadmap</a>
+                    <a href="#contato" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors font-medium">Contato</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg coffee-pattern text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-5xl font-bold mb-6 leading-tight text-black">
+                        IA e Precisão para o<br>
+                        <span class="text-black">Cafezal de Montanha</span>
+                    </h2>
+                    <p class="text-xl mb-8 text-black leading-relaxed">
+                        Transformando o manejo do café nas encostas da Serra do Caparaó com inteligência artificial embarcada e pulverização de precisão.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button onclick="scrollToSection('solucao')" class="bg-white text-black px-8 py-4 rounded-lg font-semibold hover:bg-green-50 transition-colors shadow-lg">
+                            Conheça a Solução
+                        </button>
+                        <button onclick="scrollToSection('contato')" class="border-2 border-white text-black bg-white px-8 py-4 rounded-lg font-semibold hover:bg-green-50 transition-colors">
+                            Seja um Parceiro
+                        </button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+                        <h3 class="text-2xl font-bold mb-6 text-black">O Desafio do Seu Joaquim</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm">💰</span>
+                                </div>
+                                <span class="text-black">R$ 10.000/ha em custos anuais</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm">📉</span>
+                                </div>
+                                <span class="text-black">16 sacas/ha vs 30-38 no planalto</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm">⏰</span>
+                                </div>
+                                <span class="text-black">6+ horas para pulverizar 1 hectare</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solução Section -->
+    <section id="solucao" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-black mb-4">A Solução Sentinela</h2>
+                <p class="text-xl text-black max-w-3xl mx-auto">
+                    Integramos IA embarcada ao Burrinho Mecânico para identificar pragas planta a planta e pulverizar apenas onde necessário.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="card-hover bg-white border-2 border-green-200 p-8 rounded-2xl shadow-lg">
+                    <div class="w-16 h-16 bg-green-600 rounded-xl flex items-center justify-center mb-6">
+                        <span class="text-white text-2xl">👁️</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-black mb-4">Visão Computacional</h3>
+                    <ul class="text-black space-y-2 font-medium">
+                        <li>• Câmera RGB Full HD 60fps</li>
+                        <li>• Sensor multiespectral 5 bandas</li>
+                        <li>• GPS RTK (±2 cm precisão)</li>
+                    </ul>
+                </div>
+
+                <div class="card-hover bg-white border-2 border-green-200 p-8 rounded-2xl shadow-lg">
+                    <div class="w-16 h-16 bg-green-700 rounded-xl flex items-center justify-center mb-6">
+                        <span class="text-white text-2xl">🧠</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-black mb-4">IA Embarcada</h3>
+                    <ul class="text-black space-y-2 font-medium">
+                        <li>• NVIDIA Jetson Xavier NX</li>
+                        <li>• Redes neurais em tempo real</li>
+                        <li>• Detecção de pragas e doenças</li>
+                    </ul>
+                </div>
+
+                <div class="card-hover bg-white border-2 border-green-200 p-8 rounded-2xl shadow-lg">
+                    <div class="w-16 h-16 bg-green-600 rounded-xl flex items-center justify-center mb-6">
+                        <span class="text-white text-2xl">🎯</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-black mb-4">Pulverização Precisa</h3>
+                    <ul class="text-black space-y-2 font-medium">
+                        <li>• 7 bicos de alta precisão</li>
+                        <li>• Válvulas solenoides controladas</li>
+                        <li>• Aplicação apenas onde necessário</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-2xl p-8">
+                <h3 class="text-2xl font-bold text-black mb-6 text-center">Como Funciona</h3>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white font-bold">1</span>
+                        </div>
+                        <h4 class="font-semibold mb-2 text-black">Percorre a Lavoura</h4>
+                        <p class="text-sm text-black">Burrinho adaptado navega pelas encostas</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white font-bold">2</span>
+                        </div>
+                        <h4 class="font-semibold mb-2 text-black">Identifica Problemas</h4>
+                        <p class="text-sm text-black">IA detecta pragas e doenças em tempo real</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white font-bold">3</span>
+                        </div>
+                        <h4 class="font-semibold mb-2 text-black">Pulveriza com Precisão</h4>
+                        <p class="text-sm text-black">Aplica defensivos apenas onde necessário</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white font-bold">4</span>
+                        </div>
+                        <h4 class="font-semibold mb-2 text-black">Gera Relatórios</h4>
+                        <p class="text-sm text-black">Mapas de calor e histórico de manejo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resultados Section -->
+    <section id="resultados" class="py-20 bg-green-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-black mb-4">Resultados Esperados</h2>
+                <p class="text-xl text-black">Impacto real na produtividade e sustentabilidade do café de montanha</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="bg-white p-8 rounded-2xl shadow-lg text-center">
+                    <div class="stat-counter mb-2">30%</div>
+                    <h3 class="text-xl font-bold text-black mb-2">Redução de Defensivos</h3>
+                    <p class="text-black">Economia de até R$ 1.050/ha por ano</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-lg text-center">
+                    <div class="stat-counter mb-2">70%</div>
+                    <h3 class="text-xl font-bold text-black mb-2">Menos Tempo</h3>
+                    <p class="text-black">1,8h vs 6h+ no processo manual</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-lg text-center">
+                    <div class="stat-counter mb-2">20%</div>
+                    <h3 class="text-xl font-bold text-black mb-2">Mais Produtividade</h3>
+                    <p class="text-black">Detecção precoce de pragas e doenças</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-8 shadow-lg">
+                <h3 class="text-2xl font-bold text-black mb-6">Diferencial Competitivo</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center p-6 bg-gray-50 rounded-xl">
+                        <div class="text-4xl mb-4">🚁</div>
+                        <h4 class="font-bold text-black mb-2">Drones</h4>
+                        <p class="text-sm text-black">Mapeiam bem, mas limitações para pulverizar em alta declividade</p>
+                    </div>
+                    <div class="text-center p-6 bg-gray-50 rounded-xl">
+                        <div class="text-4xl mb-4">🚜</div>
+                        <h4 class="font-bold text-black mb-2">Tratores</h4>
+                        <p class="text-sm text-black">Não operam nas encostas da Mantiqueira ou Caparaó</p>
+                    </div>
+                    <div class="text-center p-6 bg-green-100 rounded-xl border-2 border-green-300">
+                        <div class="text-4xl mb-4">🤖</div>
+                        <h4 class="font-bold text-green-900 mb-2">Sentinela</h4>
+                        <p class="text-sm text-green-800">Mobilidade + IA + ação imediata onde outros não chegam</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Roadmap de Desenvolvimento</h2>
+                <p class="text-xl text-gray-600">Do protótipo à comercialização em 18 meses</p>
+            </div>
+
+            <div class="space-y-8">
+                <div class="flex items-start space-x-6">
+                    <div class="flex-shrink-0 w-16 h-16 bg-green-600 rounded-xl flex items-center justify-center">
+                        <span class="text-white font-bold">1</span>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Fase 1 - Prova de Conceito (3-6 meses)</h3>
+                        <ul class="text-gray-600 space-y-1 mb-4">
+                            <li>• Integração do hardware e sensores ao Burrinho Mecânico</li>
+                            <li>• Coleta e rotulagem de imagens com IFES, Fundação Procafé e Caparaó Jr.</li>
+                            <li>• Treinamento inicial da IA para ferrugem, bicho-mineiro e broca-do-café</li>
+                        </ul>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <p class="text-sm text-blue-800"><strong>Financiamento:</strong> InovAtiva Brasil e Projeto Centelha</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-6">
+                    <div class="flex-shrink-0 w-16 h-16 bg-green-700 rounded-xl flex items-center justify-center">
+                        <span class="text-white font-bold">2</span>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Fase 2 - Refinamento (6-12 meses)</h3>
+                        <ul class="text-gray-600 space-y-1 mb-4">
+                            <li>• Ampliar banco de dados para mais pragas e doenças</li>
+                            <li>• Reforço de hardware para alta umidade e poeira</li>
+                            <li>• Desenvolvimento de aplicativo Android para controle</li>
+                            <li>• Testes em campo com cafeicultores parceiros</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-6">
+                    <div class="flex-shrink-0 w-16 h-16 bg-green-600 rounded-xl flex items-center justify-center">
+                        <span class="text-white font-bold">3</span>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Fase 3 - Piloto e Comercialização (12-18 meses)</h3>
+                        <ul class="text-gray-600 space-y-1 mb-4">
+                            <li>• Programa piloto em 10-20 propriedades familiares</li>
+                            <li>• Validação de métricas de economia e produtividade</li>
+                            <li>• Definição do modelo de negócio (venda, leasing ou serviço)</li>
+                            <li>• Parcerias com cooperativas para distribuição</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 bg-gray-50 rounded-2xl p-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Investimento e ROI</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-900 mb-4">Custo do Protótipo</h4>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex justify-between"><span>Burrinho Mecânico adaptado:</span> <span class="font-semibold">R$ 10-20k</span></li>
+                            <li class="flex justify-between"><span>Módulo IA e sensores:</span> <span class="font-semibold">R$ 3-8k</span></li>
+                            <li class="flex justify-between"><span>Desenvolvimento software:</span> <span class="font-semibold">R$ 30-80k</span></li>
+                            <li class="border-t pt-2 flex justify-between font-bold"><span>Total estimado:</span> <span>R$ 43-108k</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-100 p-6 rounded-xl border border-green-200">
+                        <h4 class="text-lg font-semibold text-green-900 mb-4">Retorno do Investimento</h4>
+                        <p class="text-green-800 mb-4">Com economia de custos e ganhos de produtividade:</p>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-green-600 mb-2">< 2 safras</div>
+                            <p class="text-sm text-green-700">Tempo para ROI completo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contato" class="py-20 bg-gradient-to-r from-green-700 to-green-800 text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold mb-6">Transforme o Futuro do Café de Montanha</h2>
+            <p class="text-xl mb-8 text-gray-300">
+                Estamos prontos para levar o Sentinela do Café aos produtores que mais precisam. 
+                Junte-se a nós nessa revolução tecnológica sustentável.
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl">
+                    <div class="text-3xl mb-4">🤝</div>
+                    <h3 class="font-bold mb-2">Parceiros</h3>
+                    <p class="text-sm text-gray-300">Cooperativas e associações de produtores</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl">
+                    <div class="text-3xl mb-4">🔬</div>
+                    <h3 class="font-bold mb-2">Pesquisadores</h3>
+                    <p class="text-sm text-gray-300">Instituições de ensino e pesquisa</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl">
+                    <div class="text-3xl mb-4">💰</div>
+                    <h3 class="font-bold mb-2">Investidores</h3>
+                    <p class="text-sm text-gray-300">Fundos de impacto e agtech</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="openContact('parceria')" class="bg-white text-green-600 px-8 py-4 rounded-lg font-semibold hover:bg-green-50 transition-colors">
+                    Quero ser Parceiro
+                </button>
+                <button onclick="openContact('investimento')" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-colors">
+                    Quero Investir
+                </button>
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-green-500">
+                <p class="text-lg font-semibold mb-2">Sentinela do Café</p>
+                <p class="text-green-200">Tecnologia na medida da montanha, na medida do produtor.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="modalTitle" class="text-2xl font-bold text-gray-900">Entre em Contato</h3>
+                <button onclick="closeContact()" class="text-gray-400 hover:text-gray-600">
+                    <span class="text-2xl">×</span>
+                </button>
+            </div>
+            
+            <form id="contactForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Nome</label>
+                    <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Seu nome completo">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="seu@email.com">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Organização</label>
+                    <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Sua empresa/instituição">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Mensagem</label>
+                    <textarea rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Como podemos colaborar?"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+                    Enviar Mensagem
+                </button>
+            </form>
+            
+            <div class="mt-6 p-4 bg-green-50 rounded-lg">
+                <p class="text-sm text-green-800">
+                    <strong>Demo:</strong> Este é um protótipo. Em produção, o formulário enviaria os dados para o sistema de CRM da equipe.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        function openContact(type) {
+            const modal = document.getElementById('contactModal');
+            const title = document.getElementById('modalTitle');
+            
+            if (type === 'parceria') {
+                title.textContent = 'Seja Nosso Parceiro';
+            } else if (type === 'investimento') {
+                title.textContent = 'Oportunidade de Investimento';
+            }
+            
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeContact() {
+            const modal = document.getElementById('contactModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simulate form submission
+            const button = e.target.querySelector('button[type="submit"]');
+            const originalText = button.textContent;
+            
+            button.textContent = 'Enviando...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                button.textContent = 'Mensagem Enviada!';
+                button.classList.remove('bg-green-600', 'hover:bg-green-700');
+                button.classList.add('bg-green-500');
+                
+                setTimeout(() => {
+                    closeContact();
+                    button.textContent = originalText;
+                    button.disabled = false;
+                    button.classList.remove('bg-green-500');
+                    button.classList.add('bg-green-600', 'hover:bg-green-700');
+                    e.target.reset();
+                }, 1500);
+            }, 1000);
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('contactModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeContact();
+            }
+        });
+
+        // Animate counters when they come into view
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-counter');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.textContent);
+                        let current = 0;
+                        const increment = target / 50;
+                        
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                counter.textContent = target + '%';
+                                clearInterval(timer);
+                            } else {
+                                counter.textContent = Math.floor(current) + '%';
+                            }
+                        }, 30);
+                        
+                        observer.unobserve(counter);
+                    }
+                });
+            });
+            
+            counters.forEach(counter => observer.observe(counter));
+        }
+
+        // Initialize animations when page loads
+        document.addEventListener('DOMContentLoaded', animateCounters);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96d202e8465daede',t:'MTc1NDg1NTMxMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
